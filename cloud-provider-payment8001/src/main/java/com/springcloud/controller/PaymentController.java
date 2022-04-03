@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author wanyu
@@ -29,7 +30,7 @@ public class PaymentController {
     private DiscoveryClient discoveryClient;
 
     @GetMapping("/payment/lb")
-    public String getPaymentLB(){
+    public String getPaymentLB() {
         return serverPort;
     }
 
@@ -53,24 +54,34 @@ public class PaymentController {
 
     //只传给前端CommonResult，不需要前端了解其他的组件
     @PostMapping(value = "/payment/create")
-    public CommonResult create(@RequestBody Payment payment) {
+    public CommonResult<Integer> create(@RequestBody Payment payment) {
         int result = paymentService.create(payment);
         log.info("*****插入结果是：" + result);
         if (result > 0) {
-            return new CommonResult(200, "插入数据成功:" + serverPort, result);
+            return new CommonResult<>(200, "插入数据成功:" + serverPort, result);
         } else {
-            return new CommonResult(444, "插入数据失败:" + serverPort, null);
+            return new CommonResult<>(444, "插入数据失败:" + serverPort, null);
         }
     }
 
     @GetMapping(value = "/payment/get/{id}")
-    public CommonResult getPaymentById(@PathVariable("id") Long id) {
+    public CommonResult<Payment> getPaymentById(@PathVariable("id") Long id) {
         Payment payment = paymentService.getPaymentById(id);
         log.info("*****插入结果是：" + payment);
         if (payment != null) {
-            return new CommonResult(200, "查询成功:" + serverPort, payment);
+            return new CommonResult<>(200, "查询成功:" + serverPort, payment);
         } else {
-            return new CommonResult(444, "没有对应记录,查询ID：" + id + ";" + serverPort, null);
+            return new CommonResult<>(444, "没有对应记录,查询ID：" + id + ";" + serverPort, null);
         }
+    }
+
+    @GetMapping("/payment/feign/timeout")
+    public String paymentFeignTimeout() {
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return serverPort;
     }
 }
