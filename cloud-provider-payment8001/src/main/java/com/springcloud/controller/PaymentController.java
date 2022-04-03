@@ -28,6 +28,11 @@ public class PaymentController {
     @Resource
     private DiscoveryClient discoveryClient;
 
+    @GetMapping("/payment/lb")
+    public String getPaymentLB(){
+        return serverPort;
+    }
+
     @GetMapping("/payment/discovery")
     public Object discovery() {
         //获取服务列表的信息

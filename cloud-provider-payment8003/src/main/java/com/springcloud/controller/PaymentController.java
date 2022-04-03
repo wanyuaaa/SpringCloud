@@ -22,6 +22,11 @@ public class PaymentController {
     @Value("${server.port}")
     private String serverPort;
 
+    @GetMapping("/payment/lb")
+    public String getPaymentLB(){
+        return serverPort;
+    }
+
     //只传给前端CommonResult，不需要前端了解其他的组件
     @PostMapping(value = "/payment/create")
     public CommonResult create(@RequestBody Payment payment) {

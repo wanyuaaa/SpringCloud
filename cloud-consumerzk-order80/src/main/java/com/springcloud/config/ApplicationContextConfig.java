@@ -7,17 +7,13 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  * @author wanyu
- * @createTime 2022-04-02 20:53
+ * @createTime 2022-04-03 16:43
  */
 @Configuration
 public class ApplicationContextConfig {
-
-    //往容器中添加一个RestTemplate
-    //RestTemplate提供了多种便捷访问远程http访问的方法
     @Bean
-    //@LoadBalanced//开启负载均衡功能
-    public RestTemplate restTemplate() {
+    @LoadBalanced   //负载均衡
+    public RestTemplate getRestTemplate(){
         return new RestTemplate();
     }
-
 }
