@@ -1,0 +1,28 @@
+server:
+  port: 3366
+
+spring:
+  application:
+    name: config-client
+  cloud:
+    config:
+      label: master
+      name: config
+      profile: dev
+      uri: http://localhost:3344
+  rabbitmq:
+    host: 192.168.117.135  #本机写localhost，服务器的写服务器地址
+    port: 5672   #客户端和RabbitMQ进行通信的端口
+    username: guest #默认也是guest
+    password: guest #默认也是guest
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

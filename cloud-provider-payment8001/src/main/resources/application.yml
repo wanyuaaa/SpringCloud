@@ -4,10 +4,15 @@ server:
 spring:
   application:
     name: cloud-payment-service
+  zipkin:
+    base-url: http://192.168.117.1:9411
+  sleuth:
+    sampler:
+      probability: 1  #采样率值介于0到1之间，1则表示全部采集（一般不为1，不然高并发性能会有影响）
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource      #当前数据源操作类型
     driver-class-name: org.gjt.mm.mysql.Driver        #mysql驱动包
-    url: jdbc:mysql://localhost:13306/db2019?useUnicode=true&characterEncoding-utr-8&useSSL=false
+    url: jdbc:mysql://192.168.117.1:13306/db2019?useUnicode=true&characterEncoding-utr-8&useSSL=false
     username: root
     password: root
 
