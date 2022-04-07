@@ -34,6 +34,13 @@
         <module>cloudalibaba-provider-payment9002</module>
         <module>cloudalibaba-consumer-nacos-order83</module>
         <module>cloudalibaba-config-nacos-client3377</module>
+        <module>cloudalibaba-sentinel-service8401</module>
+        <module>cloudalibaba-provider-payment9003</module>
+        <module>cloudalibaba-provider-payment9004</module>
+        <module>cloudalibaba-consumer-nacos-order84</module>
+        <module>seata-order-service2001</module>
+        <module>seata-storage-service2002</module>
+        <module>seata-account-service2003</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -58,6 +65,7 @@
         <lombok.version>1.18.22</lombok.version>
         <mysql.version>5.1.49</mysql.version>
         <druid.version>1.2.8</druid.version>
+        <druidstarter.version>1.2.8</druidstarter.version>
         <mybatis.spring.boot.version>2.2.2</mybatis.spring.boot.version>
     </properties>
 
@@ -113,6 +121,11 @@
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
                 <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druidstarter.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
